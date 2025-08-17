@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <h4>We Are Hexashop</h4>
+                                <span>Discover Style for Every You – Men, Women & Kids!</span>
+                                <div class="main-border-button">
+                                    <a href="#">Buy now</a>
+                                </div>
+                            </div>
+                            <img src="{% static 'images/left-banner-image.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            {% for cat in categories %}
+                                <div class="col-lg-6">
+                                    <div class="right-first-image">
+                                        <div class="thumb">
+                                            <div class="inner-content">
+                                                <h4>{{ cat.title }}</h4>
+                                                <span>Best Clothes For {{ cat.title }}</span>
+                                            </div>
+                                            <div class="hover-content">
+                                                <div class="inner">
+                                                    <h4>{{ cat.title }}</h4>
+                                                    <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit
+                                                        incid.</p>
+                                                    <div class="main-border-button">
+                                                        <a href="{% if cat.title == 'everything' %}
+                                                            {% url 'product_app:all_products' %}
+                                                            {% else %}
+                                                            {% url 'product_app:category_products' cat.slug %}
+                                                            {% endif %}">Discover More</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="{{ cat.image.url }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+    {% for cat in categories %}
+        <!-- ***** Men Area Starts ***** -->
+        <section class="section" id="{{ cat.title }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="section-heading">
+                            <h2>{{ cat.title }}'s Latest</h2>
+                            <span>Bold Looks, Modern Vibes – Shop Now.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="men-item-carousel">
+                            <div class="owl-men-item owl-carousel">
+                                {% for product in cat.product.all %}
+                                    <div class="item">
+                                        <div class="thumb">
+                                            <div class="hover-content">
+                                                <ul>
+                                                    <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
+                                                    <li><a href="single-product.html"><i class="fa fa-star"></i></a>
+                                                    </li>
+                                                    <li><a href="single-product.html"><i
+                                                            class="fa fa-shopping-cart"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <img src="{{ product.image.url }}" alt="">
+                                        </div>
+                                        <div class="down-content">
+                                            <h4>{{ product.title }}</h4>
+                                            <span>${{ product.price }}</span>
+                                            <ul class="stars">
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ***** Men Area Ends ***** -->
+    {% endfor %}
+
+
+    <!-- ***** Explore Area Starts ***** -->
+    <section class="section" id="explore">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <h2>Explore Our Products</h2>
+                        <span>You are allowed to use this HexaShop.</span>
+                        <div class="quote">
+                            <i class="fa fa-quote-left"></i>
+                            <p>Shop the Latest Trends for the Whole Family.</p>
+                        </div>
+                        <p>At Shopm, we believe fashion is more than just clothing—it’s a way to express who you are,
+                            no matter your age or style. Our curated collections for men, women, and kids bring together
+                            the latest trends,
+                            timeless classics, and unbeatable comfort, all in one place. Whether you're searching for a
+                            bold outfit for a night out,
+                            cozy everyday wear for your little ones, or versatile pieces that transition from work to
+                            weekend,
+                            Shopm has something for everyone in the family.</p>
+                        <div class="main-border-button">
+                            <a href="products.html">BUY NOW!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="leather">
+                                    <h4>Leather Bags</h4>
+                                    <span>Latest Collection</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="first-image">
+                                    <img src="{% static 'images/explore-image-01.jpg' %}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="second-image">
+                                    <img src="{% static 'images/explore-image-02.jpg' %}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="types">
+                                    <h4>Different Types</h4>
+                                    <span>Over 304 Products</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Explore Area Ends ***** -->
+
+{% endblock %}

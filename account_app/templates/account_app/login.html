@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="login">
+            <div class="login">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <span class="breadcrumb-item active">account</span>
+                    <span class="breadcrumb-item active">User Login</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h1> :) </h1>
+        <h2 class="section-title position-relative text-uppercase text-center mx-xl-5 mb-4"><span
+                class="bg-secondary pr-3">USER LOGIN</span></h2>
+        <div class=" px-xl-5">
+            <div class=" mb-5 contact-us" style="">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form method="post">
+
+                        {% csrf_token %}
+                        <div class="control-group">
+                            {% for error in form.username.errors %}
+                                <p class="alert alert-danger mt-2"> {{ error }} </p>
+                            {% endfor %}
+                            <label for="username">Enter your username number : </label>
+                            {{ form.username }}
+                            <p class="help-block text-danger mt-4"></p>
+                        </div>
+                        <div class="control-group">
+                            <label for="username">Enter your password : </label>
+                            {{ form.password }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <div>
+                            <button id="sendMessageButton"
+                                    type="submit"
+                                    class="btn btn-primary btn-lg d-flex align-items-center justify-content-center px-5 mt-2">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <span class="breadcrumb-item active">account</span>
+                    <span class="breadcrumb-item active">Additional information</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h1> :) </h1>
+        <h2 class="section-title position-relative text-uppercase text-center mx-xl-5 mb-4"><span
+                class="bg-secondary pr-3">Additional information</span></h2>
+        <div class=" px-xl-5">
+            <div class=" mb-5 contact-us" style="">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="control-group">
+                            {% for error in form.code.errors %}
+                                <p class="alert alert-danger"> {{ error }} </p>
+                            {% endfor %}
+                            <label for="username">Enter code : </label>
+                            {{ form.code }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {% for error in form.username.errors %}
+                                <p class="alert alert-danger"> {{ error }} </p>
+                            {% endfor %}
+                            <label for="username">Enter your username number : </label>
+                            {{ form.username }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label for="username">Enter your password : </label>
+                            {{ form.password1 }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {% for error in form.password2.errors %}
+                                <p class="alert alert-danger"> {{ error }} </p>
+                            {% endfor %}
+                            <label for="username">Enter your password again : </label>
+                            {{ form.password2 }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label for="username">Enter your fullname : </label>
+                            {{ form.full_name }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button id="sendMessageButton"
+                                    type="submit"
+                                    class="btn btn-primary btn-lg d-flex align-items-center justify-content-center px-5 mt-2">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

@@ -18,8 +18,7 @@
 
 
     <!-- Contact Start -->
-    <div class="container-fluid">
-        <h1> :) </h1>
+    <div class="container-fluid" style="margin-top: 200px;">
         <h2 class="section-title position-relative text-uppercase text-center mx-xl-5 mb-4"><span
                 class="bg-secondary pr-3">USER LOGIN</span></h2>
         <div class=" px-xl-5">
@@ -30,6 +29,7 @@
 
                         {% csrf_token %}
                         <div class="control-group">
+
                             {% for error in form.username.errors %}
                                 <p class="alert alert-danger mt-2"> {{ error }} </p>
                             {% endfor %}

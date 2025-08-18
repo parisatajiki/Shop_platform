@@ -5,7 +5,6 @@ from .forms import LoginForm, RegisterForm, CheckEmailForm
 from .models import User, PendingUser
 
 from django.core.mail import send_mail
-from django.conf import settings
 
 from random import randint
 
@@ -32,12 +31,6 @@ class UserLoginView(View):
             form.add_error("username", '.نام کاربری و یا رمز شما اشتباه است')
 
         return render(request, "account_app/login.html", {"form": form})
-
-
-
-
-
-
 
 
 

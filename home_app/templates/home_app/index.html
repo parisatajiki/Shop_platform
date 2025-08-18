@@ -14,7 +14,7 @@
                                 <h4>We Are Hexashop</h4>
                                 <span>Discover Style for Every You – Men, Women & Kids!</span>
                                 <div class="main-border-button">
-                                    <a href="#">Buy now</a>
+                                    <a href="#men">Buy now</a>
                                 </div>
                             </div>
                             <img src="{% static 'images/left-banner-image.jpg' %}" alt="">
@@ -83,11 +83,7 @@
                                         <div class="thumb">
                                             <div class="hover-content">
                                                 <ul>
-                                                    <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                                    <li><a href="single-product.html"><i class="fa fa-star"></i></a>
-                                                    </li>
-                                                    <li><a href="single-product.html"><i
-                                                            class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="{% url 'product_app:product_detail' product.slug %}"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                             <img src="{{ product.image.url }}" alt="">

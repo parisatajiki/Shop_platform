@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'account_app.apps.AccountAppConfig',
     'home_app.apps.HomeAppConfig',
     'product_app.apps.ProductAppConfig',
+    'cart_app.apps.CartAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +130,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'statics')]
 
 
 
-
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login'
 AUTH_USER_MODEL = "account_app.User"
 
@@ -140,3 +141,9 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tajikiparisa535@gmail.com'
 EMAIL_HOST_PASSWORD = 'hsdklvovrvzjyrjn'
+
+
+
+# Zarinpal Settings in settings.py
+MERCHANT = "00000000-0000-0000-0000-000000000000"
+SANDBOX = True

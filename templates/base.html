@@ -66,14 +66,20 @@
                         </li>
                         {% for cat in categories %}
                             <li class="scroll-to-section">
-                                <a class="{% if request.resolver_match.kwargs.slug == cat.slug %} active {% endif %}"
-                                   href="{% if cat.title == 'everything' %}
-                        {% url 'product_app:all_products' %}
-                     {% else %}
-                        {% url 'product_app:category_products' cat.slug %}
-                     {% endif %}">{{ cat.title }}'s</a>
+                                {% if cat.title == 'everythings' %}
+                                    <a href="{% url 'product_app:all_products' %}"
+                                       class="{% if request.resolver_match.url_name == 'all_products' %} active {% endif %}">
+                                        {{ cat.title }}'s
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'product_app:category_products' cat.slug %}"
+                                       class="{% if request.resolver_match.url_name == 'category_products' and request.resolver_match.kwargs.slug == cat.slug %} active {% endif %}">
+                                        {{ cat.title }}'s
+                                    </a>
+                                {% endif %}
                             </li>
                         {% endfor %}
+
 
                         <li class="submenu">
                             <a href="javascript:;">Pages</a>

@@ -3,12 +3,12 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, phone, password=None, email=None, full_name="کاربر بدون نام"):
-        if not phone:
-            raise ValueError("Users must have a phone number")
+    def create_user(self, username, password=None, email=None, full_name="کاربر بدون نام"):
+        if not username:
+            raise ValueError("Users must have a username")
 
         user = self.model(
-            phone=phone,
+            username=username,
             email=email,
             full_name=full_name,
         )
@@ -17,15 +17,16 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone, password=None):
+    def create_superuser(self, username, password=None):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
-            phone,
+            username,
             password=password,
         )
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -40,8 +41,7 @@ class User(AbstractBaseUser):
 
     )
     full_name = models.CharField(verbose_name="نام کامل", max_length=50, default="کاربر بدون نام")
-    username = models.CharField(verbose_name="نام کابری", max_length=50,unique=True,null=True,blank=True)
-    phone = models.CharField(max_length=12, verbose_name=" شماره تلفن همراه ", unique=True)
+    username = models.CharField(verbose_name="نام کابری", max_length=50,unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False, verbose_name=" ادمین ")
 
@@ -51,7 +51,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = []  # فیلدی که اجباری اشت و حتما باید پر شود
 
     def __str__(self):
-        return self.phone
+        return self.username
 
     class Meta:
         verbose_name = " کاربر "
@@ -85,5 +85,4 @@ class PendingUser(models.Model):
 
     def __str__(self):
         return self.email
-
 

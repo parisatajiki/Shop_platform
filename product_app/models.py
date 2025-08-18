@@ -3,7 +3,7 @@ from autoslug import AutoSlugField
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='title',unique=True,blank=True,null=True)
+    slug = AutoSlugField(populate_from='title',unique=True)
     image = models.ImageField(upload_to='images/',blank=True,null=True)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Product(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='product', blank=True, null=True)
     price = models.IntegerField()
-    slug = AutoSlugField(populate_from='title', unique=True, blank=True, null=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
 
 
     def __str__(self):

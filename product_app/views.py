@@ -15,6 +15,7 @@ class CategoryProduct(View):
 
 
 
+
 class ProductDetail(DetailView):
     model = Product
     template_name = 'product_app/product_details.html'

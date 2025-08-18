@@ -10,7 +10,7 @@ def validate_phone(value):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField( label='inter your phone',widget=forms.TextInput(attrs={'class': "form-control"}))
+    username = forms.CharField( label='inter your username',widget=forms.TextInput(attrs={'class': "form-control"}))
     password = forms.CharField(label='inter your pass', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
@@ -27,7 +27,7 @@ class RegisterForm(forms.Form):
 
 class CheckEmailForm(forms.Form):
     code = forms.CharField(validators=[validators.MaxLengthValidator(4)])
-    username = forms.CharField(label='Enter your phone',widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label='Enter your username',widget=forms.TextInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Enter your password',widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='Confirm your password',widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     full_name = forms.CharField(label='Enter your fullname',widget=forms.TextInput(attrs={'class': 'form-control'}))

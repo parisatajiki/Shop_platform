@@ -31,11 +31,11 @@
 
                         <div class="control-group">
                             {% for error in form.code.errors %}
-                                <p class="alert alert-danger"> {{ error }} </p>
+                                <p class="alert alert-danger mt-2"> {{ error }} </p>
                             {% endfor %}
                             <label for="username">Enter code : </label>
                             {{ form.code }}
-                            <p class="help-block text-danger"></p>
+                            <p class="help-block text-danger mt-2"></p>
                         </div>
                         <div class="control-group">
                             {% for error in form.username.errors %}

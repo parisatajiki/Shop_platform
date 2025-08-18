@@ -34,6 +34,15 @@ class UserLoginView(View):
         return render(request, "account_app/login.html", {"form": form})
 
 
+
+
+
+
+
+
+
+
+
 def user_logout(request):
     logout(request)
     return redirect("home_app:home")
@@ -46,23 +55,25 @@ class UserRegisterView(View):
 
     def post(self, request):
         form = RegisterForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            randcode = str(randint(1000, 9999))
-            email = cd['email']
-            send_mail(
-                "کد تاییدیه",
-                f"کد ورود به سایت فروشگاهی پریسا: {randcode}",
-                "tajikiparisa535@gmail.com",
-                [email],
-                fail_silently=False,
-            )
-            print(randcode)
-            PendingUser.objects.create(email=cd['email'], code=randcode)
-            return redirect(reverse("account_app:check_email") + f"?email={cd['email']}")
-        else:
-            form.add_error("email","invalid data")
-
+        try:
+            if form.is_valid():
+                cd = form.cleaned_data
+                randcode = str(randint(1000, 9999))
+                email = cd['email']
+                send_mail(
+                    "کد تاییدیه",
+                    f"کد ورود به سایت فروشگاهی پریسا: {randcode}",
+                    "tajikiparisa535@gmail.com",
+                    [email],
+                    fail_silently=False,
+                )
+                print(randcode)
+                PendingUser.objects.create(email=cd['email'], code=randcode)
+                return redirect(reverse("account_app:check_email") + f"?email={cd['email']}")
+            else:
+                form.add_error("email","invalid data")
+        except:
+            form.add_error("email",'check your network')
         return render(request, "account_app/register.html", {"form": form})
 
 
@@ -74,15 +85,21 @@ class CheckEmailView(View):
     def post(self, request):
         email = request.GET.get('email')
         form = CheckEmailForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            if PendingUser.objects.filter(code=cd['code'],email=email).exists():
-                user,is_created = User.objects.get_or_create(email=email,username=cd['username'],full_name=cd['full_name'],password=cd['password1'])
-                #is_created یک بولین هست که میتوانستیم برای نشان دادن خطاها ازش استفاده کنیم
-                login(request, user)
-                PendingUser.objects.filter(email=email).delete()
-                return redirect("home_app:home")
-        else:
-            form.add_error("code", "invalid data")
-
+        try:
+            if form.is_valid():
+                cd = form.cleaned_data
+                if PendingUser.objects.filter(code=cd['code'], email=email).exists():
+                    user = User.objects.create_user(
+                        username=cd['username'],
+                        email=email,
+                        full_name=cd['full_name'],
+                        password=cd['password1']
+                    )
+                    login(request, user)
+                    PendingUser.objects.filter(email=email).delete()
+                    return redirect("home_app:home")
+            else:
+                form.add_error("code", "invalid data")
+        except Exception as e:
+            form.add_error('code', e)
         return render(request, "account_app/check_email.html", {"form": form})

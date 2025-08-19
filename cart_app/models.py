@@ -18,6 +18,13 @@ class Order(models.Model):
         verbose_name = "اطلاعات خرید کاربر"
         verbose_name_plural = "اطلاعات خرید کاربرها"
 
+
+    def update_total_price(self):
+        total = sum(item.price * item.quantity for item in self.items.all())
+        self.total_price = total
+        self.save()
+
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     'account_app.apps.AccountAppConfig',
     'home_app.apps.HomeAppConfig',
     'product_app.apps.ProductAppConfig',
     'cart_app.apps.CartAppConfig',
+    'api_app.apps.ApiAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +117,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Static files (CSS, JavaScript, Images)
@@ -127,7 +129,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'statics')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -147,3 +148,16 @@ EMAIL_HOST_PASSWORD = 'hsdklvovrvzjyrjn'
 # Zarinpal Settings in settings.py
 MERCHANT = "00000000-0000-0000-0000-000000000000"
 SANDBOX = True
+
+
+
+
+# DRF api
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':
+        ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+    }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
+    }
